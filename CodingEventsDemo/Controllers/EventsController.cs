@@ -52,17 +52,16 @@ namespace coding_events_practice.Controllers
             return Redirect("/Events");
         }
 
-        [HttpPost]
-        [Route("/Events/Edit/{id?}")]
+        [Route("Events/Edit/{eventId}")]
         public IActionResult Edit(int eventId)
         {
-            Event eventToEdit = EventData.GetById(eventId);
-            ViewBag.events = eventToEdit;
+            ViewBag.eventToEdit = EventData.GetById(eventId);
+            ViewBag.Title = "Edit Event " + ViewBag.eventToEdit.Name + " (id=" + ViewBag.eventToEdit.Id + ")";
             return View();
         }
 
         [HttpPost]
-        [Route("/Events/Edit")]
+        [Route("Events/Edit")]
         public IActionResult SubmitEditEventForm(int eventId, string name, string description)
         {
             Event eventToEdit = EventData.GetById(eventId);
@@ -70,6 +69,5 @@ namespace coding_events_practice.Controllers
             eventToEdit.Description = description;
             return Redirect("/Events");
         }
-
     }
 }
