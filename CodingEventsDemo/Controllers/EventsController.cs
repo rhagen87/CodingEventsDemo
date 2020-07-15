@@ -29,7 +29,7 @@ namespace coding_events_practice.Controllers
         [Route("Events/Add")]
         public IActionResult NewEvent(Event newEvent)
         {
-            EventData.Add(newEvent);            
+            EventData.Add(newEvent);
 
             return Redirect("/Events");
         }
@@ -48,8 +48,28 @@ namespace coding_events_practice.Controllers
             {
                 EventData.Remove(eventId);
             }
-            
+
             return Redirect("/Events");
         }
+
+        [HttpPost]
+        [Route("/Events/Edit/{id?}")]
+        public IActionResult Edit(int eventId)
+        {
+            Event eventToEdit = EventData.GetById(eventId);
+            ViewBag.events = eventToEdit;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/Events/Edit")]
+        public IActionResult SubmitEditEventForm(int eventId, string name, string description)
+        {
+            Event eventToEdit = EventData.GetById(eventId);
+            eventToEdit.Name = name;
+            eventToEdit.Description = description;
+            return Redirect("/Events");
+        }
+
     }
 }
