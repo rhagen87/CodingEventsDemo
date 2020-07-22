@@ -13,7 +13,7 @@ namespace CodingEventsDemo.Controllers
         private EventDbContext context;
 
         [HttpGet]
-        [Route("EventCategory/Index)"]
+        [Route("EventCategory/Index")]
         public IActionResult Index()
         {
             List<EventCategory> categories = context.Category.ToList();
