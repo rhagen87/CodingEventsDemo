@@ -12,12 +12,19 @@ namespace CodingEventsDemo.Controllers
     {
         private EventDbContext context;
 
+        public EventCategoryController(EventDbContext dbContext) 
+        {
+            context = dbContext;
+        }
+
         [HttpGet]
-        [Route("EventCategory/Index")]
         public IActionResult Index()
         {
+            ViewBag.title = "All Categories";
             List<EventCategory> categories = context.Category.ToList();
             return View(categories);
         }
     }
 }
+
+
